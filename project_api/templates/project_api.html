@@ -11,10 +11,17 @@
             </div>
             <div class="modal-body">
                 <h5>Prediction Input:</h5>
-                <div>Sepal Length: <span id="sl"></span></div>
-                <div>Sepal Width: <span id="sw"></span></div>
-                <div>Petal Length: <span id="pl"></span></div>
-                <div>Petal width: <span id="pw"></span></div>
+                <div>G1: <span id="g1"></span></div>
+                <div>G2: <span id="g1"></span></div>
+                <div>Age: <span id="age"></span></div>
+                <div>Mother education: <span id="medu"></span></div>
+                <div>Father education: <span id="fedu"></span></div>
+                <div>Travel time: <span id="tt"></span></div>
+                <div>Study Time: <span id="st"></span></div>
+                <div>Failures: <span id="fail"></span></div>
+                <div>Freetime: <span id="ft"></span></div>
+                <div>Health Status: <span id="hs"></span></div>
+                <div>Absences: <span id="abs"></span></div>
                 <h5 class="pt-3">Prediction Classification:</h5>
                 <div id="prediction"></div>
             </div>
@@ -28,25 +35,53 @@
 
 <div class="container pt-5">
     <div class="row justify-content-md-center">
-        <div class="col-md-4">
-            <h1>Iris Prediction</h1>
+        <div class="col-md-5">
+            <h1>Passa ou Não Passa</h1>
             <form action="" id="post-form">
                 {% csrf_token %}
                 <div class="form-group">
-                    <label for="sepal_length">Sepal Length</label>
-                    <input type="number" step="0.1" class="form-control" id="sepal_length" placeholder="" required>
+                    <label for="form-g1">G1</label>
+                    <input type="number" step="1" class="form-control" id="form-g1" placeholder="" required>
                 </div>
                 <div class="form-group">
-                    <label for="Sepal Width">Sepal Width</label>
-                    <input type="number" step="0.1" class="form-control" id="sepal_width" placeholder="" required>
+                    <label for="form-g2">G2</label>
+                    <input type="number" step="1" class="form-control" id="form-g2" placeholder="" required>
                 </div>
                 <div class="form-group">
-                    <label for="petal_length">Petal Length</label>
-                    <input type="number" step="0.1" class="form-control" id="petal_length" placeholder="" required>
+                    <label for="form-age">Age</label>
+                    <input type="number" step="1" class="form-control" id="form-age" placeholder="" required>
                 </div>
                 <div class="form-group">
-                    <label for="petal_width">Petal Width</label>
-                    <input type="number" step="0.1" class="form-control" id="petal_width" placeholder="" required>
+                    <label for="form-medu">Mother Education</label>
+                    <input type="number" step="1" class="form-control" id="form-medu" placeholder="" required>
+                </div>
+                <div class="form-group">
+                    <label for="form-fedu">Father Education</label>
+                    <input type="number" step="1" class="form-control" id="form-fedu" placeholder="" required>
+                </div>
+                <div class="form-group">
+                    <label for="form-tt">Travel Time</label>
+                    <input type="number" step="1" class="form-control" id="form-tt" placeholder="" required>
+                </div>
+                <div class="form-group">
+                    <label for="form-st">Study Time</label>
+                    <input type="number" step="1" class="form-control" id="form-st" placeholder="" required>
+                </div>
+                <div class="form-group">
+                    <label for="form-fail">Failures</label>
+                    <input type="number" step="1" class="form-control" id="form-fail" placeholder="" required>
+                </div>
+                <div class="form-group">
+                    <label for="form-ft">Free Time</label>
+                    <input type="number" step="1" class="form-control" id="form-ft" placeholder="" required>
+                </div>
+                <div class="form-group">
+                    <label for="form-hs">Health Status</label>
+                    <input type="number" step="1" class="form-control" id="form-hs" placeholder="" required>
+                </div>
+                <div class="form-group">
+                    <label for="form-abs">Absences</label>
+                    <input type="number" step="1" class="form-control" id="form-abs" placeholder="" required>
                 </div>
                 <button type="submit" value="Submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Submit</button>
             </form>
@@ -61,20 +96,34 @@
             type: 'POST',
             url: '{% url "project_api:submit_prediction" %}',
             data: {
-                sepal_length: $('#sepal_length').val(),
-                sepal_width: $('#sepal_width').val(),
-                petal_length: $('#petal_length').val(),
-                petal_width: $('#petal_width').val(),
+                g1: $('#form-g1').val(),
+                g2: $('#form-g2').val(),
+                age: $('#form-age').val(),
+                medu: $('#form-medu').val(),
+                fedu: $('#form-fedu').val(),
+                tt: $('#form-tt').val(),
+                st: $('#form-st').val(),
+                fail: $('#form-fail').val(),
+                ft: $('#form-ft').val(),
+                hs: $('#form-hs').val(),
+                abs: $('#form-abs').val(),
                 csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
                 action: 'post'
             },
             success: function(json) {
                 document.forms["post-form"].reset();
                 document.getElementById("prediction").innerHTML = json['result']
-                document.getElementById("sl").innerHTML = json['sepal_length']
-                document.getElementById("sw").innerHTML = json['sepal_width']
-                document.getElementById("pl").innerHTML = json['petal_length']
-                document.getElementById("pw").innerHTML = json['petal_width']
+                document.getElementById("g1").innerHTML = json['G1']
+                document.getElementById("g2").innerHTML = json['G2']
+                document.getElementById("age").innerHTML = json['age']
+                document.getElementById("medu").innerHTML = json['mother_education']
+                document.getElementById("fedu").innerHTML = json['father_education']
+                document.getElementById("tt").innerHTML = json['travel_time']
+                document.getElementById("st").innerHTML = json['study_time']
+                document.getElementById("fail").innerHTML = json['failures']
+                document.getElementById("ft").innerHTML = json['free_time']
+                document.getElementById("hs").innerHTML = json['health_status']
+                document.getElementById("abs").innerHTML = json['absences']
             },
             error: function(xhr, errmsg, err) {
 
