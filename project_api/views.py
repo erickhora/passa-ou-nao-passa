@@ -7,7 +7,14 @@ def project_api(request):
 def predict_changes(request):
     if request.POST.get('action') == 'post':
         # Receive data from client
-        sepal_length = float(request.POST.get('sepal_length'))
-        sepal_width = float(request.POST.get('sepal_width'))
-        petal_length = float(request.POST.get('petal_length'))
-        petal_width = float(request.POST.get('petal_width'))
+        g1 = int(request.POST.get('g1'))
+        g2 = int(request.POST.get('g2'))
+        age = int(request.POST.get('age'))
+        medu = int(request.POST.get('medu'))
+        fedu = int(request.POST.get('fedu'))
+        tt = int(request.POST.get('tt'))
+        st = int(request.POST.get('st'))
+        fail = int(request.POST.get('fail'))
+        ft = int(request.POST.get('ft'))
+        hs = int(request.POST.get('hs'))
+        abs = int(request.POST.get('abs'))
